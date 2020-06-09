@@ -1,2 +1,2 @@
-<h1> This is my static Brahmakumaris website. </h1>
-It contains all the details of the World Spiritual University 'Brahmakumaris'.
+<h1> Todo Application </h1>
+It contains a Todo app that helps in organizing your tasks with a list which can make everything much more manageable.
