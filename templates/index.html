@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Todo App</title>
+</head>
+<body>
+    <div class='nav'>
+        <center>
+        <h2>
+                Todo Application
+            </h2>
+        </center>
+
+    </div>
+    
+
+    <br /><br /><br />
+    {% block content %}
+    <section>
+        {% if not todos %}
+        <center>
+            <pre>
+                No Todos Found!
+            </pre>
+        </center>    
+        {% endif %}
+    </section>    
+    <section>
+        <center>
+            <h2>
+                Your Todo
+            </h2>
+            {% for todo in todos %}
+               <form action="{% url 'delete' todo.id %}" method="post">
+                   {% csrf_token %}
+                   <li>{{todo.todo}} |
+                       {% if todo.is_completed %}
+                            <pre>Completed</pre>
+                        {% else %}
+                            <pre>Not Completed</pre> 
+                        {% endif %}
+                         | </li>
+                   <input type="submit" value="delete" name="delete">
+                   <input type="submit" value="mark as complete" name="complete">
+                   <input type="submit" value="update" name="update">
+                </form>
+            {% endfor %}             
+        </center>
+    </section>
+
+    <section>
+        <center>
+            <form action="{% url 'index' %}" method="POST">
+                {% csrf_token %}
+                <input type="text" name="todo" />
+                <input type="submit" value="submit" name="submit" />
+            </form>
+        </center>
+    </section>
+    {% endblock %}
+</body>
+</html>
